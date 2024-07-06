@@ -1,25 +1,28 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
-    class="navigationBackgroundColor"
+    class="nav-bg-color"
     :rail="rail"
     @click="rail = false"
     permanent
   >
     <v-toolbar density="compact" dense>
-      <v-btn color="red" icon="mdi-alpha-g-circle" variant="text"></v-btn>
+      <v-btn @click.stop="rail = !rail" icon="mdi-menu" variant="text"></v-btn>
       <v-spacer></v-spacer>
+      <span v-show="!rail">{{ navToolBarHeader }}</span>
       <v-btn
-        icon="mdi-chevron-left"
+        v-show="!rail"
+        icon="mdi-account-circle-outline"
         variant="text"
-        @click.stop="rail = !rail"
       ></v-btn>
-      <v-btn icon="mdi-account-circle-outline" variant="text"></v-btn>
     </v-toolbar>
 
     <v-divider></v-divider>
 
     <v-list :lines="false" density="compact" nav>
+      <v-list-subheader v-show="!rail" class="font-weight-bold">{{
+        navBarMenuHeader
+      }}</v-list-subheader>
       <v-list-item
         v-for="(item, i) in navItems"
         :key="i"
@@ -37,13 +40,15 @@
 <script>
 import { mapGetters } from "vuex";
 import { commonMixin } from "../helpers/common";
-import navigationItems from "../constant/navigationItems";
+import navigationItems from "../constant/navigationItemsConst";
 export default {
   mixins: [commonMixin],
   data() {
     return {
       drawer: true,
       rail: false,
+      navToolBarHeader: "Grants D.",
+      navBarMenuHeader: "Filecoin Workspace",
     };
   },
   computed: {
@@ -52,10 +57,12 @@ export default {
       return navigationItems;
     },
   },
+
+  methods: {},
 };
 </script>
 <style scoped>
-.navigationBackgroundColor {
+.nav-bg-color {
   background-color: #f5f5f5 !important;
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
-<users></users>    
+<dashboard></dashboard>    
 </template>
 <script>
-import users from './users.vue'
+import dashboard from './dashboard.vue'
 export default {
-  components: { users },
+  components: { dashboard },
   
 }
 </script>

@@ -1,20 +1,20 @@
 const navigationItems = [
     {
         title: "Programs",
-        path: "/users",
-        icon: "mdi-account-multiple-outline",
+        path: "/programs",
+        icon: "mdi-application-outline",
         showUserDetails: true,
     },
     {
         title: "Open Grants",
         path: "/todos",
-        icon: "mdi-note-check-outline",
+        icon: "mdi-book-open-outline",
         showUserDetails: false,
     },
     {
         title: "Applied Grants",
         path: "/posts",
-        icon: "mdi-note-text-outline",
+        icon: "mdi-file-document-check-outline",
         showUserDetails: false,
     },
     {

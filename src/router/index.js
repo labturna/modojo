@@ -1,11 +1,9 @@
 
-import Users from '@/pages/users.vue';
+import Users from '@/pages/dashboard.vue';
 import Todos from '@/pages/todos.vue';
 import Posts from '@/pages/posts.vue'
 import Albums from '@/pages/albums.vue'
 import Photos from '@/pages/photos.vue'
-
-
 
 import { createRouter, createWebHistory } from 'vue-router/auto'
 
@@ -13,11 +11,11 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    redirect: '/users'
+    redirect: '/programs'
   },
   {
-    path: '/users',
-    name: 'Users',
+    path: '/programs',
+    name: 'Programs',
     component: Users
   },
   {
