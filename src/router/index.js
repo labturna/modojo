@@ -1,7 +1,6 @@
 
-import Dashboard from '@/pages/dashboard.vue';
 import Protocols from '@/pages/protocols.vue';
-import Programs from '@/pages/programs.vue';
+import Dashboard from '@/pages/dashboard.vue';
 import OpenGrants from '@/pages/open-grants.vue';
 import AppliedGrants from '@/pages/applied-grants.vue';
 
@@ -17,11 +16,6 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard
-  },
-  {
-    path: '/programs',
-    name: 'Programs',
-    component: Programs
   },
   {
     path: '/open-grants',

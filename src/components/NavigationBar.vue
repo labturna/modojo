@@ -19,18 +19,30 @@
 
     <v-divider></v-divider>
 
-    <v-list :lines="false" density="compact" nav>
+    <v-list
+      v-model="currentNavItem"
+      mandatory
+      lines="one"
+      density="compact"
+      nav
+    >
       <v-list-subheader v-show="!rail" class="font-weight-bold">{{
         navBarMenuHeader
       }}</v-list-subheader>
+
       <v-list-item
         v-for="(item, i) in navItems"
         :key="i"
         :value="item"
         @click="$router.push(item.path)"
+        :color="navListItemColor"
       >
         <template v-slot:prepend>
-          <v-icon :icon="item.icon"></v-icon>
+          <v-tooltip :text="item.title">
+            <template v-slot:activator="{ props }">
+              <v-icon v-bind="props" :icon="item.icon"></v-icon>
+            </template>
+          </v-tooltip>
         </template>
         <v-list-item-title>{{ item.title }}</v-list-item-title>
       </v-list-item>
@@ -41,20 +53,29 @@
 import { mapGetters } from "vuex";
 import { commonMixin } from "../helpers/common";
 import navigationItems from "../constant/navigationItemsConst";
+import _ from "lodash";
 export default {
   mixins: [commonMixin],
   data() {
     return {
       drawer: true,
       rail: false,
+      navselectedItem: [1],
       navToolBarHeader: "Grants D.",
       navBarMenuHeader: "Filecoin Workspace",
+      navListItemColor: "indigo darken-3",
     };
   },
   computed: {
-    ...mapGetters(["currentUser"]),
+    ...mapGetters(["currentUser", "currentRootName"]),
     navItems() {
       return navigationItems;
+    },
+    currentNavItem() {
+      const currentIndex = _.findIndex(navigationItems, {
+        path: this.currentRootName,
+      });
+      return currentIndex;
     },
   },
 

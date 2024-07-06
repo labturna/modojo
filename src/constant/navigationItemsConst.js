@@ -1,8 +1,8 @@
 const navigationItems = [
     {
-        title: "Programs",
-        path: "/programs",
-        icon: "mdi-application-outline",
+        title: "Dashboard",
+        path: "/dashboard",
+        icon: "mdi-monitor-dashboard",
         showUserDetails: true,
     },
     {

@@ -14,7 +14,7 @@
           </v-btn>
           <span class="ml-2 text-body-1 text-medium-emphasis text-caption"
             >{{ appBarHeader }}
-            <span class="font-weight-bold">{{ currentRouteName }}</span>
+            <span class="font-weight-bold">{{ currentRootName }}</span>
           </span>
         </v-app-bar>
 
@@ -32,20 +32,19 @@ import { mapGetters } from "vuex";
 export default {
   mixins: [commonMixin],
   computed: {
-    ...mapGetters(["currentRoot"]),
+    ...mapGetters(["currentRootName"]),
   },
   data() {
     return {
       appBarHeader: "Your work",
       navGoHomeIcon: "mdi-keyboard-return",
       navGoHomeName: "Dashboard",
-      currentRouteName: "unknown",
     };
   },
   components: { NavigationBar },
   watch: {
     $route(to, from) {
-      this.currentRouteName = to.name;
+      this.$store.dispatch("setCurrentRoot", to.name);
     },
   },
   methods: {

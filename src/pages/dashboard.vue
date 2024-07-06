@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    asdas
     <v-row class="d-flex justify-space-around">
       <v-col v-for="(user, index) in userList" :key="index">
         {{ user }}

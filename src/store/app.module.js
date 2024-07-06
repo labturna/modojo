@@ -3,12 +3,12 @@
 const SET_CURRENT_ROOT = 'setCurrentRoot';
 
 const state = {
-    currentRoot: ""
+    currentRootName: ""
 }
 
 const getters = {
-    currentRoot(state) {
-        return state.currentRoot
+    currentRootName(state) {
+        return state.currentRootName
     },
 }
 
@@ -20,7 +20,7 @@ const actions = {
 
 const mutations = {
     [SET_CURRENT_ROOT](state, root) {
-        state.currentRoot = root
+        state.currentRootName = root
     },
 }
 
