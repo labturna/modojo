@@ -7,19 +7,19 @@ const navigationItems = [
     },
     {
         title: "Open Grants",
-        path: "/todos",
+        path: "/open-grants",
         icon: "mdi-book-open-outline",
         showUserDetails: false,
     },
     {
         title: "Applied Grants",
-        path: "/posts",
+        path: "/applied-grants",
         icon: "mdi-file-document-check-outline",
         showUserDetails: false,
     },
     {
         title: "Protocols",
-        path: "/albums",
+        path: "/protocols",
         icon: "mdi-bitcoin",
         showUserDetails: false,
     },

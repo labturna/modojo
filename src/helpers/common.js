@@ -11,7 +11,7 @@ export const commonMixin = {
         },
         
         /**
-         * @returns {String} - is route path '/users'
+         * @returns {String} - get current root'
          */
         getCurrentRootMethod() {
             return this.$route.name;

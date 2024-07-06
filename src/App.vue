@@ -14,7 +14,7 @@
           </v-btn>
           <span class="ml-2 text-body-1 text-medium-emphasis text-caption"
             >{{ appBarHeader }}
-            <span class="font-weight-bold">{{currentRouteName}}</span>
+            <span class="font-weight-bold">{{ currentRouteName }}</span>
           </span>
         </v-app-bar>
 
@@ -26,7 +26,7 @@
 
 <script>
 import { commonMixin } from "./helpers/common";
-import NavigationBar from "./pages/NavigationBar.vue";
+import NavigationBar from "./components/NavigationBar.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -39,17 +39,18 @@ export default {
       appBarHeader: "Your work",
       navGoHomeIcon: "mdi-keyboard-return",
       navGoHomeName: "Dashboard",
+      currentRouteName: "unknown",
     };
   },
   components: { NavigationBar },
   watch: {
     $route(to, from) {
       this.currentRouteName = to.name;
-    }
+    },
   },
   methods: {
     redirect() {
-      let path = "/programs";
+      let path = "/dashboard";
       this.redirectToResourcePage(path);
     },
   },

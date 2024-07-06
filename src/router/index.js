@@ -1,9 +1,9 @@
 
-import Users from '@/pages/dashboard.vue';
-import Todos from '@/pages/todos.vue';
-import Posts from '@/pages/posts.vue'
-import Albums from '@/pages/albums.vue'
-import Photos from '@/pages/photos.vue'
+import Dashboard from '@/pages/dashboard.vue';
+import Protocols from '@/pages/protocols.vue';
+import Programs from '@/pages/programs.vue';
+import OpenGrants from '@/pages/open-grants.vue';
+import AppliedGrants from '@/pages/applied-grants.vue';
 
 import { createRouter, createWebHistory } from 'vue-router/auto'
 
@@ -11,34 +11,33 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    redirect: '/programs'
+    redirect: '/dashboard'
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
   },
   {
     path: '/programs',
     name: 'Programs',
-    component: Users
+    component: Programs
   },
   {
-    path: '/todos',
-    name: 'Todos',
-    component: Todos
+    path: '/open-grants',
+    name: 'OpenGrants',
+    component: OpenGrants
   },
   {
-    path: '/posts',
-    name: 'Posts',
-    component: Posts
+    path: '/applied-grants',
+    name: 'AppliedGrants',
+    component: AppliedGrants
   },
   {
-    path: '/albums',
-    name: 'Albums',
-    component: Albums,
+    path: '/protocols',
+    name: 'Protocols',
+    component: Protocols
   },
-  {
-    path: 'photos',
-    name: 'Photos',
-    component: Photos,
-  },
-
 ];
 
 const router = createRouter({

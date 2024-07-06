@@ -109,7 +109,6 @@ export default {
     },
     async routeUserDetails(userId) {
       await this.$store.dispatch("getCurrentUser", userId);
-      this.redirectToResourcePage('/todos');
     },
   },
 };

@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    asdas
     <v-row class="d-flex justify-space-around">
       <v-col v-for="(user, index) in userList" :key="index">
         {{ user }}
@@ -8,19 +9,18 @@
   </v-container>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import UserCard from "../components/UserCard.vue";
 export default {
-  components: { UserCard },
-  computed: {
-    ...mapGetters(["userList"]),
-  },
-  created() {
-    this.$store.dispatch("getAllUsers");
-  },
+  name: "Dashboard",
+  computed: {},
   data() {
     return {
       loading: false,
+      userList: [
+        {
+          name: "ozkan",
+          job: "full-stack-engineer",
+        },
+      ],
     };
   },
   methods: {},
