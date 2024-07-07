@@ -9,12 +9,12 @@ export const commonMixin = {
         redirectToResourcePage(path) {
             return this.$router.push(path)
         },
-
+        
         /**
-         * @returns {Boolean} - is route path '/users'
+         * @returns {String} - get current root'
          */
-        isCurrentRootParams(path) {
-            return this.$route.name === path
+        getCurrentRootMethod() {
+            return this.$route.name;
         },
     },
 };

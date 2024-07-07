@@ -1,25 +1,25 @@
 const navigationItems = [
     {
-        title: "Programs",
-        path: "/users",
-        icon: "mdi-account-multiple-outline",
+        title: "Dashboard",
+        path: "/dashboard",
+        icon: "mdi-monitor-dashboard",
         showUserDetails: true,
     },
     {
         title: "Open Grants",
-        path: "/todos",
-        icon: "mdi-note-check-outline",
+        path: "/open-grants",
+        icon: "mdi-book-open-outline",
         showUserDetails: false,
     },
     {
         title: "Applied Grants",
-        path: "/posts",
-        icon: "mdi-note-text-outline",
+        path: "/applied-grants",
+        icon: "mdi-file-document-check-outline",
         showUserDetails: false,
     },
     {
         title: "Protocols",
-        path: "/albums",
+        path: "/protocols",
         icon: "mdi-bitcoin",
         showUserDetails: false,
     },
