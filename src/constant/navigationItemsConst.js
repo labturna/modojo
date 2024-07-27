@@ -6,6 +6,12 @@ const navigationItems = [
         showUserDetails: true,
     },
     {
+        title: "Overwiew",
+        path:"/overview",
+        icon: "mdi-book-search-outline",
+        showUserDetails: false
+    },
+    {
         title: "Open Grants",
         path: "/open-grants",
         icon: "mdi-book-open-outline",

@@ -4,11 +4,16 @@
     class="nav-bg-color"
     :rail="rail"
     @click="rail = false"
-    permanent
   >
     <v-toolbar density="compact" dense>
       <v-btn @click.stop="rail = !rail" icon="mdi-menu" variant="text"></v-btn>
       <v-spacer></v-spacer>
+      <v-avatar size="30">
+        <v-img
+          alt="John"
+          src="../assets/motoko_logo.svg"
+        ></v-img>
+      </v-avatar>
       <span v-show="!rail">{{ navToolBarHeader }}</span>
       <v-btn
         v-show="!rail"
@@ -61,7 +66,7 @@ export default {
       drawer: true,
       rail: false,
       navselectedItem: [1],
-      navToolBarHeader: "Grants D.",
+      navToolBarHeader: "Motoko",
       navBarMenuHeader: "Filecoin Workspace",
       navListItemColor: "indigo darken-3",
     };
