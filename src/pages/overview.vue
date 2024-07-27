@@ -66,8 +66,13 @@ export default {
   },
 
   methods: {
-    async getMdDocumentationFiles(id) {
-      const response = await fetch(`../../public/documentation/${id}.md`);
+    // async getMdDocumentationFiles(id) {
+    //   const response = await fetch(`../../public/documentation/${id}.md`);
+    //   this.markdownContent = await response.text();
+    // },
+    async getMdDocumentationFiles() {
+      const response = await fetch(`../../public/course.json`);
+      console.log('response', response)
       this.markdownContent = await response.text();
     },
   },
