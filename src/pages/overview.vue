@@ -1,13 +1,27 @@
 
 
 <template>
-  <h1>Overview</h1>
-  <v-card>
-    <v-card-title class="headline">Markdown İçeriği</v-card-title>
+  <v-card elevation="0">
+    <v-container>
+      <v-card-text class="mdClass">
+        <div v-html="compiledMarkdown"></div>
+      </v-card-text>
+    </v-container>
 
-    <v-card-text>
-      <div v-html="compiledMarkdown"></div>
-    </v-card-text>
+    <v-navigation-drawer>
+      <v-list>
+        <v-list-subheader class="text-decoration-underline">On This Page</v-list-subheader>
+        <v-list-item v-for="(header, index) in visibleHeaders" :key="index">
+          <v-btn
+            @click="getMdDocumentationFiles(header.id)"
+            variant="tonal"
+            size="x-small"
+          >
+            {{ index + 1 + "." + header.title }}
+          </v-btn>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </v-card>
 </template>
 
@@ -20,6 +34,21 @@ export default {
   data() {
     return {
       markdownContent: "",
+      defaultMdId: "overview",
+      visibleHeaders: [
+        {
+          id: "overview",
+          title: "Overview",
+        },
+        {
+          id: "motivation_and_goals",
+          title: "Motivation and Goals",
+        },
+        {
+          id: "why_motoko",
+          title: "Why Motoko",
+        },
+      ],
     };
   },
   computed: {
@@ -31,12 +60,23 @@ export default {
       });
     },
   },
+
   async created() {
-    const response = await fetch("../../README.md");
-    this.markdownContent = await response.text();
+    await this.getMdDocumentationFiles(this.defaultMdId);
+  },
+
+  methods: {
+    async getMdDocumentationFiles(id) {
+      const response = await fetch(`../../public/documentation/${id}.md`);
+      this.markdownContent = await response.text();
+    },
   },
 };
 </script>
 
 <style scoped>
+.mdClass {
+  font-size: 1em;
+  line-height: 1.5;
+}
 </style>
