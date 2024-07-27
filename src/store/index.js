@@ -1,10 +1,10 @@
 import { createStore } from 'vuex';
-import users from './users.module';
+import contents from './contents.module';
 import app from './app.module'
 
 export default createStore({
   modules: {
     app,  
-    users,
+    contents,
   }
 });

@@ -49,14 +49,14 @@ export default {
   },
   methods: {
     redirect() {
-      let path = "/dashboard";
+      let path = "/overview";
       this.redirectToResourcePage(path);
     },
   },
 };
 </script>
 
-<style scoped>
+<style>
 .v-btn {
   text-transform: none !important;
 }

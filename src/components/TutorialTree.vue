@@ -1,124 +1,107 @@
 <template>
-    <v-container>
+  <v-card class="custom-scrollable-content">
+    <v-card-text>
+        <v-text-field
+          v-model="search"
+          clear-icon="mdi-close-circle-outline"
+          label="Search Company Directory"
+          clearable
+          dark
+          flat
+          hide-details
+          solo-inverted
+        ></v-text-field>
+
       <v-treeview
-        :items="items"
-        activatable
-        item-key="slug"
-        open-on-click
-        @update:active="fetchContent"
+        v-model:selected="tree"
+        :items="treeItems"
+        indeterminate-icon="mdi-bookmark-minus"
+        item-title="name"
+        item-value="slug"
+        color="indigo"
+        density="compact"
+        transition
       >
         <template v-slot:prepend="{ item, open }">
-          <v-icon v-if="item.children">{{ open ? 'mdi-folder-open' : 'mdi-folder' }}</v-icon>
-          <v-icon v-else>mdi-file-document</v-icon>
-        </template>
-        <template v-slot:label="{ item }">
-          {{ item.title }}
+          <v-icon x-small v-if="item.children">{{
+            open ? "mdi-folder-open" : "mdi-folder"
+          }}</v-icon>
+          <v-icon v-else>mdi-language-markdown</v-icon>
         </template>
       </v-treeview>
-    </v-container>
-  </template>
-  
+    </v-card-text>
+  </v-card>
+</template>
   <script>
-  export default {
-    data() {
-      return {
-        treeItems: [],
-        open: [],
-        items: [
-        {
-          id: 1,
-          title: 'Applications :',
-          children: [
-            { id: 2, title: 'Calendar : app' },
-            { id: 3, title: 'Chrome : app' },
-            { id: 4, title: 'Webstorm : app' },
-          ],
-        },
-        {
-          id: 5,
-          title: 'Documents :',
-          children: [
-            {
-              id: 6,
-              title: 'vuetify :',
-              children: [
-                {
-                  id: 7,
-                  title: 'src :',
-                  children: [
-                    { id: 8, title: 'index : ts' },
-                    { id: 9, title: 'bootstrap : ts' },
-                  ],
-                },
-              ],
-            },
-            {
-              id: 10,
-              title: 'material2 :',
-              children: [
-                {
-                  id: 11,
-                  title: 'src :',
-                  children: [
-                    { id: 12, title: 'v-btn : ts' },
-                    { id: 13, title: 'v-card : ts' },
-                    { id: 14, title: 'v-window : ts' },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 15,
-          title: 'Downloads :',
-          children: [
-            { id: 16, title: 'October : pdf' },
-            { id: 17, title: 'November : pdf' },
-            { id: 18, title: 'Tutorial : html' },
-          ],
-        },
-        {
-          id: 19,
-          title: 'Videos :',
-          children: [
-            {
-              id: 20,
-              title: 'Tutorials :',
-              children: [
-                { id: 21, title: 'Basic layouts : mp4' },
-                { id: 22, title: 'Advanced techniques : mp4' },
-                { id: 23, title: 'All about app : dir' },
-              ],
-            },
-            { id: 24, title: 'Intro : mov' },
-            { id: 25, title: 'Conference introduction : avi' },
-          ],
-        },
-      ],
-      };
+import { mapGetters } from "vuex";
+export default {
+  data() {
+    return {
+      treeItems: [],
+      search: null,
+      caseSensitive: true,
+      tree: "",
+      selectedObject: {},
+    };
+  },
+  computed: {
+    ...mapGetters(["currentContents"]),
+    filter() {
+      return this.caseSensitive
+        ? (item, search, textKey) => item[textKey].indexOf(search) > -1
+        : undefined;
     },
-    mounted() {
-      fetch('/course.json')
-        .then(response => response.json())
-        .then(data => {
-          this.treeItems = [data];
-        });
+  },
+  watch: {
+    tree: {
+      handler: function (val) {
+        this.handleSelection(val);
+      },
     },
-    methods: {
-      fetchContent(active) {
-        const slug = active[0];
-        if (slug) {
-          this.$emit('content-changed', slug);
+  },
+  mounted() {
+    this.fetchContent();
+  },
+  methods: {
+    handleSelection(selected) {
+      if (selected.length) {
+        // Assume the selection is always a single item for simplicity.
+        const selectedItemSlug = selected[0];
+        this.selectedObject = this.findItemBySlug(
+          this.treeItems,
+          selectedItemSlug
+        );
+      }
+      this.$store.dispatch("getCurrentContent", this.selectedObject);
+    },
+    findItemBySlug(items, slug) {
+      for (const item of items) {
+        if (item.slug === slug) {
+          return item;
+        }
+        if (item.children) {
+          const found = this.findItemBySlug(item.children, slug);
+          if (found) {
+            return found;
+          }
         }
       }
-    }
-  };
-  </script>
+      return null;
+    },
+    fetchContent() {
+      fetch("../content/course.json")
+        .then((response) => response.json())
+        .then((data) => {
+          this.treeItems = data.lessons;
+        });
+    },
+  },
+};
+</script>
   
   <style scoped>
-  .v-treeview {
-    max-width: 400px;
-  }
-  </style>
+.v-treeview {
+  max-width: 400px;
+}
+</style>
   

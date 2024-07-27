@@ -1,18 +1,23 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="6">
-        <tutorial-tree></tutorial-tree>
+  <v-row>
+    <v-col cols="3">
+      <tutorial-tree></tutorial-tree>
+    </v-col>
+      <v-col cols="5">
+        <lesson-content></lesson-content>
       </v-col>
-      <v-col cols="6"></v-col>
+      <v-col cols="4">
+       RUN CODE PAGE
+      </v-col>
     </v-row>
-  </v-container>
 </template>
 
 <script>
 import TutorialTree from '@/components/TutorialTree.vue';
+import LessonContent from '@/components/LessonContent.vue';
 export default {
-  components: { TutorialTree },};
+  components: { TutorialTree, LessonContent }
+  };
 </script>
 
 <style>
