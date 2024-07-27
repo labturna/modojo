@@ -25,6 +25,7 @@ export default defineConfig({
       autoImport: true,
       styles: {
         configFile: 'src/styles/settings.scss',
+        // configFile: 'src/styles/markdown.scss',
       },
     }),
     Components(),

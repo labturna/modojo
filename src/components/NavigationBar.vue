@@ -14,12 +14,12 @@
           src="../assets/motoko_logo.svg"
         ></v-img>
       </v-avatar>
-      <span v-show="!rail">{{ navToolBarHeader }}</span>
-      <v-btn
+      <span class="mr-2" v-show="!rail">{{ navToolBarHeader }}</span>
+      <!-- <v-btn
         v-show="!rail"
         icon="mdi-account-circle-outline"
         variant="text"
-      ></v-btn>
+      ></v-btn> -->
     </v-toolbar>
 
     <v-divider></v-divider>
@@ -68,7 +68,7 @@ export default {
       navselectedItem: [1],
       navToolBarHeader: "Motoko",
       navBarMenuHeader: "Filecoin Workspace",
-      navListItemColor: "indigo darken-3",
+      navListItemColor: "indigo",
     };
   },
   computed: {

@@ -12,8 +12,15 @@
     {
       "name": "Introduction",
       "slug": "introduction",
-      "content": "01-introduction/lesson.md",
-      "files": ["01-introduction/main.mo"]
+      "children": [
+        {
+          "name": "Welcome",
+          "slug": "intro",
+          "content": "01-introduction/welcome/lesson.md",
+          "files": ["01-introduction/welcome/main.mo"],
+          "solution": null
+        }
+      ]
     },
     {
       "name": "Basics",

@@ -1,10 +1,7 @@
 
-import Protocols from '@/pages/protocols.vue';
 import Dashboard from '@/pages/dashboard.vue';
-import OpenGrants from '@/pages/open-grants.vue';
-import AppliedGrants from '@/pages/applied-grants.vue';
 import Overview from '@/pages/overview.vue'
-
+import Practice from '@/pages/practice.vue';
 import { createRouter, createWebHistory } from 'vue-router/auto'
 
 const routes = [
@@ -17,6 +14,11 @@ const routes = [
     path: '/overview',
     name: 'Overview',
     component: Overview
+  },
+  {
+    path: '/practice',
+    name: 'Practice',
+    component: Practice
   },
   {
     path: '/dashboard',

@@ -3,8 +3,8 @@
 <template>
   <v-card elevation="0">
     <v-container>
-      <v-card-text class="mdClass">
-        <div v-html="compiledMarkdown"></div>
+      <v-card-text class="markdownClass">
+        <div v-html="lessonsContentMarkdown"></div>
       </v-card-text>
     </v-container>
 
@@ -13,7 +13,7 @@
         <v-list-subheader class="text-decoration-underline">On This Page</v-list-subheader>
         <v-list-item v-for="(header, index) in visibleHeaders" :key="index">
           <v-btn
-            @click="getMdDocumentationFiles(header.id)"
+            @click="getMdDocsFiles(header.id)"
             variant="tonal"
             size="x-small"
           >
@@ -52,7 +52,7 @@ export default {
     };
   },
   computed: {
-    compiledMarkdown() {
+    lessonsContentMarkdown() {
       return marked(this.markdownContent, {
         highlight: function (code, lang) {
           return hljs.highlightAuto(code).value;
@@ -62,12 +62,12 @@ export default {
   },
 
   async created() {
-    await this.getMdDocumentationFiles(this.defaultMdId);
+    await this.getMdDocsFiles(this.defaultMdId);
   },
 
   methods: {
-    async getMdDocumentationFiles(id) {
-      const response = await fetch(`../../public/documentation/${id}.md`);
+    async getMdDocsFiles(id) {
+      const response = await fetch(`../documentation/${id}.md`);
       this.markdownContent = await response.text();
     },
   },
@@ -75,7 +75,7 @@ export default {
 </script>
 
 <style scoped>
-.mdClass {
+.markdownClass {
   font-size: 1em;
   line-height: 1.5;
 }
