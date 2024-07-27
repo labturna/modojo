@@ -14,29 +14,14 @@ const routes = [
     redirect: '/dashboard'
   },
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: Dashboard
-  },
-  {
     path: '/overview',
     name: 'Overview',
     component: Overview
   },
   {
-    path: '/open-grants',
-    name: 'OpenGrants',
-    component: OpenGrants
-  },
-  {
-    path: '/applied-grants',
-    name: 'AppliedGrants',
-    component: AppliedGrants
-  },
-  {
-    path: '/protocols',
-    name: 'Protocols',
-    component: Protocols
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
   },
 ];
 
