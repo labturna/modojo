@@ -7,7 +7,7 @@
         <lesson-content></lesson-content>
       </v-col>
       <v-col cols="4">
-       RUN CODE PAGE
+       <motoko-editor></motoko-editor>
       </v-col>
     </v-row>
 </template>
@@ -15,8 +15,9 @@
 <script>
 import TutorialTree from '@/components/TutorialTree.vue';
 import LessonContent from '@/components/LessonContent.vue';
+import MotokoEditor from '@/components/MotokoEditor.vue';
 export default {
-  components: { TutorialTree, LessonContent }
+  components: { TutorialTree, LessonContent, MotokoEditor },
   };
 </script>
 
