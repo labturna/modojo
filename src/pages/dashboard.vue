@@ -2,7 +2,6 @@
   <v-container>
     <v-row class="d-flex justify-space-around">
       <v-col v-for="(user, index) in userList" :key="index">
-        {{ user }}
       </v-col>
     </v-row>
   </v-container>
