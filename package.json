@@ -8,11 +8,9 @@
         "lint": "eslint . --fix --ignore-path .gitignore"
     },
     "dependencies": {
-        "motoko": "3.8.0",
         "@mdi/font": "^7.4.47",
         "axios": "^1.7.2",
         "core-js": "^3.34.0",
-        "highlight.js": "11.9.0",
         "highlightjs-motoko": "^1.0.3",
         "lodash": "^4.17.21",
         "marked": "12.0.2",
