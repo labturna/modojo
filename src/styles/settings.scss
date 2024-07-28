@@ -27,3 +27,90 @@
 header.v-toolbar.v-toolbar--density-default.elevation-0.v-theme--light.v-locale--is-ltr.v-app-bar {
     border-bottom: 1px solid rgb(206, 206, 206);
 }
+
+
+// custom scrollable content
+.custom-scrollable-content {
+    max-height: 750px;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+  
+  .custom-scrollable-content::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .custom-scrollable-content::-webkit-scrollbar-track {
+    background: rgba(10, 2, 34, 0.1);
+    border-radius: 10px;
+  }
+  
+  .custom-scrollable-content::-webkit-scrollbar-thumb {
+    background: rgba(10, 2, 34, 0.1);
+    border-radius: 10px;
+    border: 3px solid rgba(10, 2, 34, 0.1);
+  }
+  
+  .custom-scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(10, 2, 34, 0.1);
+  }
+
+  /* src/assets/styles.scss */
+$background-color: #cacaca;
+$font-background-color: #3fb474;
+$border-radius: 5px;
+$link-color: #274c74;
+$font-color: #ffffff;
+$link-hover-color: #06014e;
+
+.markdown-content {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+
+  h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+  }
+
+  h2 {
+    color: #2c276d !important;
+  }
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  code {
+    background-color: $font-background-color;
+    border-radius: $border-radius;
+    padding: 2px 4px;
+    font-family: 'Courier New', Courier, monospace;
+    color: $font-color;
+    font-size: 12px;
+  }
+
+  pre {
+    background-color: $background-color;
+    border-radius: $border-radius;
+    padding: 10px;
+    overflow-x: auto;
+
+    code {
+      background-color: transparent;
+      padding: 0;
+      color: #121213 !important;
+    }
+  }
+
+  a {
+    color: $link-color;
+    text-decoration: none;
+    border-bottom: 1px dashed $link-color;
+    transition: color 0.3s, border-bottom-color 0.3s;
+
+    &:hover {
+      color: $link-hover-color;
+      border-bottom-color: $link-hover-color;
+    }
+  }
+}

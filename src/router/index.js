@@ -1,10 +1,7 @@
 
-import Protocols from '@/pages/protocols.vue';
 import Dashboard from '@/pages/dashboard.vue';
-import OpenGrants from '@/pages/open-grants.vue';
-import AppliedGrants from '@/pages/applied-grants.vue';
 import Overview from '@/pages/overview.vue'
-
+import Practice from '@/pages/practice.vue';
 import { createRouter, createWebHistory } from 'vue-router/auto'
 
 const routes = [
@@ -14,29 +11,19 @@ const routes = [
     redirect: '/dashboard'
   },
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: Dashboard
-  },
-  {
     path: '/overview',
     name: 'Overview',
     component: Overview
   },
   {
-    path: '/open-grants',
-    name: 'OpenGrants',
-    component: OpenGrants
+    path: '/practice',
+    name: 'Practice',
+    component: Practice
   },
   {
-    path: '/applied-grants',
-    name: 'AppliedGrants',
-    component: AppliedGrants
-  },
-  {
-    path: '/protocols',
-    name: 'Protocols',
-    component: Protocols
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
   },
 ];
 
