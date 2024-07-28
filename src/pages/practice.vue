@@ -1,14 +1,4 @@
 <template>
-  <v-app-bar :elevation="0">
-    <template v-slot:prepend>
-      <v-btn color="indigo" icon @click="drawer = !drawer">
-        <v-icon>{{ !drawer ? "mdi-menu" : "mdi-menu-left-outline" }}</v-icon>
-      </v-btn>
-    </template>
-
-    <v-app-bar-title>Practice</v-app-bar-title>
-  </v-app-bar>
-
   <v-navigation-drawer
     v-model="drawer"
     permanent
@@ -19,14 +9,22 @@
   </v-navigation-drawer>
 
   <v-container>
-    <v-row>
-      <v-col cols="12" md="5">
-        <lesson-content></lesson-content>
-      </v-col>
-      <v-col cols="12" md="7">
-        <motoko-editor></motoko-editor>
-      </v-col>
-    </v-row>
+    <v-card elevation="0">
+      <v-toolbar color="cyan-lighten-1">
+        <v-btn color="indigo" icon @click="drawer = !drawer">
+          <v-icon>{{ !drawer ? "mdi-menu" : "mdi-menu-left-outline" }}</v-icon>
+        </v-btn>
+        <v-toolbar-title>Practice</v-toolbar-title>
+      </v-toolbar>
+      <v-row>
+        <v-col cols="12" md="5">
+          <lesson-content></lesson-content>
+        </v-col>
+        <v-col cols="12" md="7">
+          <motoko-editor></motoko-editor>
+        </v-col>
+      </v-row>
+    </v-card>
   </v-container>
 </template>
 
