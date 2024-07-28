@@ -11,15 +11,8 @@
           <div class="line-numbers" ref="lineNumbers">
             <pre>{{ lineNumbersContent }}</pre>
           </div>
-          <v-textarea
-            v-model="code"
-            outlined
-            rows="16"
-            class="custom-textarea"
-            @input="updateLineNumbers"
-            @scroll="syncScroll"
-            ref="textarea"
-          ></v-textarea>
+          <v-textarea v-model="code" outlined rows="16" class="custom-textarea" @input="updateLineNumbers"
+            @scroll="syncScroll" ref="textarea"></v-textarea>
         </div>
       </v-col>
     </v-row>
@@ -35,7 +28,7 @@
         <v-card class="flex-grow-1">
           <v-card-title>Output:</v-card-title>
           <v-card-text class="output-text">
-            
+
             <pre>{{ output }}</pre>
           </v-card-text>
         </v-card>
@@ -45,7 +38,7 @@
 </template>
 
 <script>
-import mo from 'motoko/interpreter';
+import mo from "motoko/interpreter";
 
 export default {
   data() {
@@ -58,15 +51,30 @@ export default {
   methods: {
     async runCode() {
       try {
-        const path = '/main.mo';
+        this.loading = true;
+        const path = "/main.mo";
         mo.clearPackages();
-        await mo.installPackages({ base: 'dfinity/motoko-base/master/src' });
+        await mo.installPackages({ base: "dfinity/motoko-base/master/src" });
         mo.write(path, this.code);
         const result = await mo.run(path);
-        this.output = result.stdout || 'No output produced.';
+        this.output = result.stdout || "No output produced.";
+        this.loading = false;
       } catch (error) {
         this.output = `Error: ${error.message}`;
+        this.loading = false;
       }
+    },
+    next() {
+      this.clearCode();
+      this.$store.dispatch("setNextLesson");
+    },
+    prev() {
+      this.clearCode();
+      this.$store.dispatch("setPrevLesson");
+    },
+    clearCode() {
+      this.code = "";
+      this.output = "";
     },
     updateLineNumbers() {
       const lines = this.code.split('\n').length;
@@ -120,9 +128,12 @@ export default {
 }
 
 .custom-textarea {
-  margin-left: 40px; /* Adjust this value as needed to match .line-numbers width */
-  width: calc(100% - 40px); /* Adjust this value as needed to match .line-numbers width */
-  font-family: 'Montserrat', sans-serif; /* Montserrat font */
+  margin-left: 40px;
+  /* Adjust this value as needed to match .line-numbers width */
+  width: calc(100% - 40px);
+  /* Adjust this value as needed to match .line-numbers width */
+  font-family: 'Montserrat', sans-serif;
+  /* Montserrat font */
   font-size: 6px !important;
 }
 
@@ -139,6 +150,7 @@ export default {
 .output-text {
   height: 100%;
   overflow-y: auto;
-  white-space: pre-wrap; /* Ensures long lines wrap */
+  white-space: pre-wrap;
+  /* Ensures long lines wrap */
 }
 </style>

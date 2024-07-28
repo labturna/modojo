@@ -15,11 +15,6 @@
         ></v-img>
       </v-avatar>
       <span class="mr-2" v-show="!rail">{{ navToolBarHeader }}</span>
-      <!-- <v-btn
-        v-show="!rail"
-        icon="mdi-account-circle-outline"
-        variant="text"
-      ></v-btn> -->
     </v-toolbar>
 
     <v-divider></v-divider>

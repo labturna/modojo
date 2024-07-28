@@ -1,17 +1,7 @@
 <template>
-  <v-card class="custom-scrollable-content">
-    <v-card-text>
-        <v-text-field
-          v-model="search"
-          clear-icon="mdi-close-circle-outline"
-          label="Search Company Directory"
-          clearable
-          dark
-          flat
-          hide-details
-          solo-inverted
-        ></v-text-field>
-
+  <v-card elevation="0">
+    <v-card-text class="custom-scrollable-content">
+      <v-card-title>Contents</v-card-title>
       <v-treeview
         v-model:selected="tree"
         :items="treeItems"
@@ -42,6 +32,7 @@ export default {
       caseSensitive: true,
       tree: "",
       selectedObject: {},
+      mockSelectedTree: ["arithmetic-operators"],
     };
   },
   computed: {
@@ -56,6 +47,12 @@ export default {
     tree: {
       handler: function (val) {
         this.handleSelection(val);
+      },
+    },
+    currentContents: {
+      handler: function (val) {
+        this.tree = [val.slug];
+        this.handleSelection([val.slug]);
       },
     },
   },

@@ -40,9 +40,7 @@ import { mapGetters } from "vuex";
 
 export default {
   data() {
-    return {
-      lessonHeader: "Motoko Tutorial",
-    };
+    return {};
   },
   computed: {
     ...mapGetters([
