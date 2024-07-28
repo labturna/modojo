@@ -1,6 +1,9 @@
 const GET_CURRENT_CONTENT = 'getCurrentContent';
 const GET_SOLUTION_CONTENT = 'getSolutionContent';
 const SET_SHOW_SOLUTION = 'setShowSolution'
+const NEXT_LESSON = 'setNextLesson'
+const PREV_LESSON = 'setPrevLesson'
+import course from '../../public/content/course.json'
 const state = {
   currentContents: {
     "name": "Welcome",
@@ -39,6 +42,12 @@ const actions = {
   [SET_SHOW_SOLUTION](state, data) {
     state.commit(SET_SHOW_SOLUTION, data)
   },
+  [NEXT_LESSON](state, data) {
+    state.commit(NEXT_LESSON, data)
+  },
+  [PREV_LESSON](state, data) {
+    state.commit(PREV_LESSON, data)
+  },
 }
 
 const mutations = {
@@ -55,6 +64,42 @@ const mutations = {
   },
   async [SET_SHOW_SOLUTION](state, payload) {
     state.showSolution = payload
+  },
+  async [NEXT_LESSON](state) {
+    const lessons = course.lessons
+    let newLessonContent = {}
+    for (let i = 0; i < lessons.length; i++) {
+      for (let j = 0; j < lessons[i].children.length; j++) {
+        if (lessons[i].children[j].slug === state.currentContents.slug) {
+          if (j + 1 < lessons[i].children.length) {
+            newLessonContent = lessons[i].children[j + 1]
+          } else if (i + 1 < lessons.length && lessons[i + 1].children.length > 0) {
+            newLessonContent = lessons[i + 1].children[0];
+          } else {
+            newLessonContent = lessons[0].children[0] // reached last lesson
+          }
+        }
+      }
+    }
+    state.currentContents = newLessonContent
+  },
+  async [PREV_LESSON](state) {
+    const lessons = course.lessons
+    let newLessonContent = {}
+    for (let i = 0; i < lessons.length; i++) {
+      for (let j = 0; j < lessons[i].children.length; j++) {
+        if (lessons[i].children[j].slug === state.currentContents.slug) {
+          if (j - 1 >= 0) {
+            newLessonContent = lessons[i].children[j - 1];
+          } else if (i - 1 >= 0 && lessons[i - 1].children.length > 0) {
+            newLessonContent = lessons[i - 1].children[lessons[i - 1].children.length - 1];
+          } else {
+            newLessonContent = lessons[0].children[0] // reached last lesson
+          }
+        }
+      }
+    }
+    state.currentContents = newLessonContent
   },
 }
 
