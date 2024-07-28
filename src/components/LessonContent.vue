@@ -31,14 +31,14 @@
       >
 
       <v-card-text v-show="showSolution" class="markdownClass">
-        <v-card-title class="pl-0 text-decoration-underline"
+        <v-card-title class="pl-0"
           >Solutions
           <v-btn
             v-show="showSolution"
             @click="showSolutionMethod(false)"
             rounded="xl"
             size="small"
-            color="red"
+            color="indigo lighten-4"
             class="ml-2"
           >
             <v-icon>mdi-eye-off</v-icon>
@@ -61,9 +61,7 @@ import { mapGetters } from "vuex";
 
 export default {
   data() {
-    return {
-      lessonHeader: "Motoko Tutorial",
-    };
+    return {};
   },
   computed: {
     ...mapGetters([
