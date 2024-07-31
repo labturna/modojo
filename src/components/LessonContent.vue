@@ -1,16 +1,10 @@
-
-
 <template>
   <v-card elevation="1">
     <v-card-item>
       <v-card-title>{{ courseJson.name }}</v-card-title>
       <v-card-subtitle>
         <span class="me-1 font-weight-bold">{{ currentContents?.name }}</span>
-        <v-icon
-          color="indigo"
-          icon="mdi-language-markdown"
-          size="small"
-        ></v-icon>
+        <v-icon color="indigo" icon="mdi-language-markdown" size="small"></v-icon>
       </v-card-subtitle>
     </v-card-item>
 
@@ -20,33 +14,18 @@
         <v-divider></v-divider>
       </v-card-text>
 
-      <v-btn
-        @click="showSolutionMethod(true)"
-        v-show="!showSolution"
-        prepend-icon="mdi-help-circle-outline"
-        rounded="xl"
-        size="large"
-        color="grey"
-        >Show Solution</v-btn
-      >
+      <v-btn @click="showSolutionMethod(true)" v-show="!showSolution" prepend-icon="mdi-help-circle-outline" rounded="xl" size="large" color="grey">Show Solution</v-btn>
 
       <v-card-text v-show="showSolution" class="markdownClass">
-        <v-card-title class="pl-0"
-          >Solutions
-          <v-btn
-            v-show="showSolution"
-            @click="showSolutionMethod(false)"
-            rounded="xl"
-            size="small"
-            color="indigo lighten-4"
-            class="ml-2"
-          >
-            <v-icon>mdi-eye-off</v-icon>
-            Hide</v-btn
-          >
+        <v-card-title class="pl-0 text-decoration-underline">Solutions
+          <v-btn v-show="showSolution" @click="showSolutionMethod(false)" rounded="xl" size="small" color="red" class="ml-2">
+            <v-icon>mdi-eye-off</v-icon>Hide
+          </v-btn>
+          <v-btn @click="copyToClipboard" rounded="xl" size="small" color="primary" class="ml-2">
+            <v-icon>mdi-content-copy</v-icon>Copy
+          </v-btn>
         </v-card-title>
-
-        <div v-html="solutionMarkDown" class="markdown-content"></div>
+        <div ref="solutionText" v-html="solutionMarkDown" class="markdown-content"></div>
       </v-card-text>
     </v-container>
   </v-card>
@@ -92,6 +71,15 @@ export default {
     await this.getMdDocsFiles(this.currentContents);
   },
   methods: {
+    copyToClipboard() {
+      const solutionTextElement = this.$refs.solutionText;
+      const dummy = document.createElement("textarea");
+      dummy.value = solutionTextElement.innerText;
+      document.body.appendChild(dummy);
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+    },
     async getMdDocsFiles(defaultContent) {
       this.$store.dispatch("getCurrentContent", defaultContent);
     },
@@ -99,7 +87,7 @@ export default {
       if (value) {
         this.$store.dispatch("getSolutionContent", this.currentContents);
       } else {
-        this.$store.dispatch("setShowSolution", this.value);
+        this.$store.dispatch("setShowSolution", value);
       }
     },
   },
