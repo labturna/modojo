@@ -52,7 +52,6 @@ export default {
         { id: "Hash", title: "Hash" },
         { id: "HashMap", title: "Hash Map" },
         { id: "Heap", title: "Heap" },
-        { id: "Index", title: "Index" },
         { id: "Int", title: "Int" },
         { id: "Int8", title: "Int8" },
         { id: "Int16", title: "Int16" },
