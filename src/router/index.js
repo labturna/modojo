@@ -7,23 +7,23 @@ import { createRouter, createWebHistory } from 'vue-router/auto'
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    redirect: '/dashboard'
+    redirect: '/overview',
+    component: () => import('../pages/overview.vue'),
   },
   {
     path: '/overview',
     name: 'Overview',
-    component: Overview
+    component: Overview,
   },
   {
     path: '/practice',
     name: 'Practice',
-    component: Practice
+    component: Practice,
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
   },
 ];
 

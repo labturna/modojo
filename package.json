@@ -19,8 +19,10 @@
         "roboto-fontface": "*",
         "vue": "^3.0.0",
         "vue-cookies": "^1.8.4",
+        "vue-prism-editor": "^2.0.0-alpha.2",
         "vuetify": "^3.5.0",
-        "vuex": "^4.0.0"
+        "vuex": "^4.0.0",
+        "prismjs": "1.15.0"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^5.0.4",

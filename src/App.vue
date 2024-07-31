@@ -39,18 +39,21 @@ export default {
       appBarHeader: "Your work",
       navGoHomeIcon: "mdi-keyboard-return",
       navGoHomeName: "Dashboard",
+      defaultPath: '/overview'
     };
   },
   components: { NavigationBar },
   watch: {
     $route(to, from) {
+      if(this.getCurrentRootMethod() === '/') {
+      this.redirectToResourcePage(this.defaultPath);
+      }
       this.$store.dispatch("setCurrentRoot", to.name);
     },
   },
   methods: {
     redirect() {
-      let path = "/overview";
-      this.redirectToResourcePage(path);
+      this.redirectToResourcePage(this.defaultPath);
     },
   },
 };
