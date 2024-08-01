@@ -14,11 +14,11 @@
         <v-divider></v-divider>
       </v-card-text>
 
-      <v-btn @click="showSolutionMethod(true)" v-show="!showSolution" prepend-icon="mdi-help-circle-outline" rounded="xl" size="large" color="grey">Show Solution</v-btn>
+      <v-btn @click="toggleSolution" v-show="!showSolution" prepend-icon="mdi-help-circle-outline" rounded="xl" size="large" color="grey">Show Solution</v-btn>
 
       <v-card-text v-show="showSolution" class="markdownClass">
         <v-card-title class="pl-0 text-decoration-underline">Solutions
-          <v-btn v-show="showSolution" @click="showSolutionMethod(false)" rounded="xl" size="small" color="red" class="ml-2">
+          <v-btn v-show="showSolution" @click="toggleSolution" rounded="xl" size="small" color="red" class="ml-2">
             <v-icon>mdi-eye-off</v-icon>Hide
           </v-btn>
           <v-btn @click="copyToClipboard" rounded="xl" size="small" color="primary" class="ml-2">
@@ -82,12 +82,13 @@ export default {
     },
     async getMdDocsFiles(defaultContent) {
       this.$store.dispatch("getCurrentContent", defaultContent);
+      this.$store.dispatch("setShowSolution", false); // Menüyü değiştirirken çözüm gösterimini kapat
     },
-    showSolutionMethod(value) {
-      if (value) {
+    toggleSolution() {
+      const newShowSolution = !this.showSolution;
+      this.$store.dispatch("setShowSolution", newShowSolution);
+      if (newShowSolution) {
         this.$store.dispatch("getSolutionContent", this.currentContents);
-      } else {
-        this.$store.dispatch("setShowSolution", value);
       }
     },
   },
