@@ -70,6 +70,17 @@ export default {
   async created() {
     await this.getMdDocsFiles(this.currentContents);
   },
+  watch: {
+    currentContents: {
+      immediate: true,
+      handler(newVal, oldVal) {
+        if (newVal !== oldVal) {
+          this.getMdDocsFiles(newVal);
+          this.$store.dispatch("setShowSolution", false); // Menüyü değiştirirken çözüm gösterimini kapat
+        }
+      },
+    },
+  },
   methods: {
     copyToClipboard() {
       const solutionTextElement = this.$refs.solutionText;
@@ -82,7 +93,6 @@ export default {
     },
     async getMdDocsFiles(defaultContent) {
       this.$store.dispatch("getCurrentContent", defaultContent);
-      this.$store.dispatch("setShowSolution", false); // Menüyü değiştirirken çözüm gösterimini kapat
     },
     toggleSolution() {
       const newShowSolution = !this.showSolution;
