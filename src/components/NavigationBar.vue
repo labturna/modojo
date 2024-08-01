@@ -47,8 +47,21 @@
         <v-list-item-title>{{ item.title }}</v-list-item-title>
       </v-list-item>
     </v-list>
+
+    <v-spacer></v-spacer>
+    <v-divider></v-divider>
+    <v-list-item style="position: absolute; bottom: 0; width: 100%;" class="mb-4">
+      <v-btn
+        icon="mdi-github"
+        href="https://github.com/labturna/modojo"
+        target="_blank"
+        rel="noopener"
+      >
+      </v-btn>
+    </v-list-item>
   </v-navigation-drawer>
 </template>
+
 <script>
 import { mapGetters } from "vuex";
 import { commonMixin } from "../helpers/common";
@@ -62,7 +75,7 @@ export default {
       rail: false,
       navselectedItem: [1],
       navToolBarHeader: "Motoko",
-      navBarMenuHeader: "Filecoin Workspace",
+      navBarMenuHeader: "Motoko Workspace",
       navListItemColor: "indigo",
     };
   },
@@ -82,8 +95,12 @@ export default {
   methods: {},
 };
 </script>
+
 <style scoped>
 .nav-bg-color {
   background-color: #f5f5f5 !important;
+}
+.v-navigation-drawer .v-spacer {
+  flex-grow: 1;
 }
 </style>
