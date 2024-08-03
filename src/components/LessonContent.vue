@@ -52,15 +52,25 @@ export default {
     lessonsContentMarkdown() {
       return marked(this.lessonContent, {
         highlight: function (code, lang) {
-          return hljs.highlightAuto(code).value;
+          if (lang && hljs.getLanguage(lang)) {
+            return hljs.highlight(lang, code).value;
+          } else {
+            return hljs.highlightAuto(code).value;
+          }
         },
+        renderer: this.customRenderer(),
       });
     },
     solutionMarkDown() {
       return marked(this.solutionContent, {
         highlight: function (code, lang) {
-          return hljs.highlightAuto(code).value;
+          if (lang && hljs.getLanguage(lang)) {
+            return hljs.highlight(lang, code).value;
+          } else {
+            return hljs.highlightAuto(code).value;
+          }
         },
+        renderer: this.customRenderer(),
       });
     },
     courseJson() {
@@ -101,6 +111,18 @@ export default {
         this.$store.dispatch("getSolutionContent", this.currentContents);
       }
     },
+    customRenderer() {
+      const renderer = new marked.Renderer();
+      renderer.code = (code, lang) => {
+        const highlighted = hljs.highlightAuto(code).value;
+        return `
+          <div class="code-block">
+            <pre><code class="hljs">${highlighted}</code></pre>
+          </div>
+        `;
+      };
+      return renderer;
+    },
   },
 };
 </script>
@@ -110,4 +132,10 @@ export default {
   font-size: 1em;
   line-height: 1.5;
 }
+
+.code-block {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
 </style>
