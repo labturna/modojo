@@ -8,10 +8,10 @@
     <v-toolbar density="compact" dense>
       <v-btn @click.stop="rail = !rail" icon="mdi-menu" variant="text"></v-btn>
       <v-spacer></v-spacer>
-      <v-avatar size="30">
+      <v-avatar size="150">
         <v-img
-          alt="John"
-          src="../assets/motoko_logo.svg"
+          alt="MoDojo"
+          src="../assets/modojo.png"
         ></v-img>
       </v-avatar>
       <span class="mr-2" v-show="!rail">{{ navToolBarHeader }}</span>
@@ -74,7 +74,7 @@ export default {
       drawer: true,
       rail: false,
       navselectedItem: [1],
-      navToolBarHeader: "Motoko",
+      navToolBarHeader: "",
       navBarMenuHeader: "Motoko Workspace",
       navListItemColor: "indigo",
     };
