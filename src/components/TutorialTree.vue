@@ -22,17 +22,18 @@
     </v-card-text>
   </v-card>
 </template>
-  <script>
+
+<script>
 import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
       treeItems: [],
       search: null,
       caseSensitive: true,
-      tree: "",
+      tree: [], // Başlangıçta boş bir dizi
       selectedObject: {},
-      mockSelectedTree: ["arithmetic-operators"],
     };
   },
   computed: {
@@ -51,8 +52,10 @@ export default {
     },
     currentContents: {
       handler: function (val) {
-        this.tree = [val.slug];
-        this.handleSelection([val.slug]);
+        if (val) {
+          this.tree = [val.slug]; // Doğru slug ile güncelle
+          this.handleSelection([val.slug]);
+        }
       },
     },
   },
@@ -62,14 +65,10 @@ export default {
   methods: {
     handleSelection(selected) {
       if (selected.length) {
-        // Assume the selection is always a single item for simplicity.
         const selectedItemSlug = selected[0];
-        this.selectedObject = this.findItemBySlug(
-          this.treeItems,
-          selectedItemSlug
-        );
+        this.selectedObject = this.findItemBySlug(this.treeItems, selectedItemSlug);
+        this.$store.dispatch("getCurrentContent", this.selectedObject);
       }
-      this.$store.dispatch("getCurrentContent", this.selectedObject);
     },
     findItemBySlug(items, slug) {
       for (const item of items) {
@@ -90,15 +89,21 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           this.treeItems = data.lessons;
+          if (data.lessons.length) {
+            this.tree = [data.lessons[0].slug]; // İlk öğeyi varsayılan olarak seç
+            this.handleSelection([data.lessons[0].slug]); // Seçimi tetikle
+          }
+        })
+        .catch((error) => {
+          console.error("Content fetch error:", error);
         });
     },
   },
 };
 </script>
-  
-  <style scoped>
+
+<style scoped>
 .v-treeview {
   max-width: 400px;
 }
 </style>
-  
