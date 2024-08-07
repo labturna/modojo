@@ -32,7 +32,7 @@ export default {
       treeItems: [],
       search: null,
       caseSensitive: true,
-      tree: [], // Başlangıçta boş bir dizi
+      tree: [],
       selectedObject: {},
     };
   },
@@ -53,7 +53,7 @@ export default {
     currentContents: {
       handler: function (val) {
         if (val) {
-          this.tree = [val.slug]; // Doğru slug ile güncelle
+          this.tree = [val.slug];
           this.handleSelection([val.slug]);
         }
       },
@@ -90,8 +90,8 @@ export default {
         .then((data) => {
           this.treeItems = data.lessons;
           if (data.lessons.length) {
-            this.tree = [data.lessons[0].slug]; // İlk öğeyi varsayılan olarak seç
-            this.handleSelection([data.lessons[0].slug]); // Seçimi tetikle
+            this.tree = [data.lessons[0].slug];
+            this.handleSelection([data.lessons[0].slug]);
           }
         })
         .catch((error) => {
