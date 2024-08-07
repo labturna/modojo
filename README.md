@@ -28,14 +28,6 @@ To start the development server with hot-reload, run the following command. The 
 docker-compose up --build
 ```
 
-##  Stay in touch
-
-- Authors:
-	- Arslan Bilecen
-	- Sinem Bilecen
-	- Özkan Semiz
-- Website - https://github.com/labturna
-
 ## 📑 License
 
 [MIT](http://opensource.org/licenses/MIT)
