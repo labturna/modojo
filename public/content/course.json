@@ -295,6 +295,26 @@
           "solution": "06-actors/principals/solution.md"
         }
       ]
+    },
+    {
+      "name": "Challenges",
+      "slug": "challenges",
+      "children": [
+        {
+          "name": "Two Sum",
+          "slug": "two-sum",
+          "content": "07-challenges/two-sum/lesson.md",
+          "files": ["07-challenges/two-sum/main.mo"],
+          "solution": "07-challenges/two-sum/solution.md"
+        },
+        {
+          "name": "Palindrome",
+          "slug": "palindrome",
+          "content": "07-challenges/palindrome/lesson.md",
+          "files": ["07-challenges/palindrome/main.mo"],
+          "solution": "07-challenges/palindrome/solution.md"
+        }
+      ]
     }
   ]
 }
