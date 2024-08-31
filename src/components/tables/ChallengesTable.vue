@@ -3,25 +3,26 @@
     <template v-slot:top>
       <v-toolbar flat>
         <v-toolbar-title>Challanges</v-toolbar-title>
-
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
       </v-toolbar>
     </template>
 
     <template v-slot:[`item.difficulty`]="{ item }">
-      <span class="font-weight-bold" :class="`text-${difficultyStatusColor(item.difficulty)}`">{{
-        item.difficulty
-      }}</span>
+      <span
+        class="font-weight-bold"
+        :class="`text-${difficultyStatusColor(item.difficulty)}`"
+        >{{ item.difficulty }}</span
+      >
     </template>
 
     <template v-slot:[`item.actions`]="{ item }">
       <v-btn
-      color="indigo"
+        color="indigo"
         size="small"
         variant="outlined"
         prepend-icon="mdi-arrow-right-circle"
-        @click="editItem(item)"
+        @click="routeSolutionPage(item)"
       >
         <template v-slot:prepend>
           <v-icon></v-icon>
@@ -43,11 +44,12 @@
 </template>
 
 <script>
-import Difficulty from "../../../public/challenges/difficultyEnum";
-import FilterTable from '../FilterTable.vue';
+import { commonMixin } from "@/helpers/common";
+import FilterTable from "../FilterTable.vue";
 
 export default {
   components: { FilterTable },
+  mixins: [commonMixin],
   data: () => ({
     headers: [
       {
@@ -57,7 +59,7 @@ export default {
         key: "id",
       },
       { title: "Title", key: "title" },
-      { title: "Description", key: "description", width:"50%" },
+      { title: "Description", key: "description", width: "50%" },
       { title: "Difficulty", key: "difficulty" },
       { title: "Actions", key: "actions", sortable: false },
     ],
@@ -73,12 +75,10 @@ export default {
   },
 
   methods: {
-    difficultyStatusColor(status) {
-      if (status === Difficulty.Easy) {
-        return "green";
-      } else if (status === Difficulty.Medium) {
-        return "orange";
-      } else return "red";
+    routeSolutionPage(item) {
+      this.$store.dispatch("setChallengeProblemContent", item);
+      this.$router.push('/solutions');
+
     },
   },
 };

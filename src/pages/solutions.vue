@@ -3,87 +3,172 @@
     <v-row>
       <v-col cols="5">
         <v-card>
-          <v-card-title>{{ selectedProblem.title }}</v-card-title>
-          <v-card-subtitle>{{ selectedProblem.difficulty }}</v-card-subtitle>
-          <v-card-text>
-            <p>{{ selectedProblem.description }}</p>
+          <v-card-item>
+            <template v-slot:subtitle>
+              <v-chip
+                size="small"
+                :color="difficultyStatusColor(currentChallengeInfo.difficulty)"
+              >
+                {{ currentChallengeInfo.difficulty }}
+              </v-chip>
+              <v-chip
+                @click="showHints()"
+                size="small"
+                class="ml-2"
+                color="indigo"
+              >
+                <v-icon :icon="hintIcon" start></v-icon> Hints
+              </v-chip>
+              <v-chip
+                @click="showSolutions()"
+                size="small"
+                class="ml-2"
+                color="secondary"
+              >
+                <v-icon :icon="solutionIcon" start></v-icon> Solution
+              </v-chip>
+            </template>
+          </v-card-item>
+
+          <v-card-text class="markdownClass">
+            <div
+              v-html="challengeContentMarkDown"
+              class="markdown-content"
+            ></div>
           </v-card-text>
         </v-card>
       </v-col>
 
       <v-col cols="7">
-        <v-card>
-          <v-card-title>{{ selectedProblem.title }}</v-card-title>
-          <v-card-subtitle>{{ selectedProblem.difficulty }}</v-card-subtitle>
-          <v-card-text>
-            <p>{{ selectedProblem.description }}</p>
-            <v-textarea
-              v-model="code"
-              label="Your Solution"
-              rows="10"
-            ></v-textarea>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn color="primary" @click="runCode">Run</v-btn>
-            <v-btn color="success" @click="submitCode">Submit</v-btn>
-            <v-progress-linear
-              v-if="loading"
-              indeterminate
-              color="blue"
-            ></v-progress-linear>
-          </v-card-actions>
-        </v-card>
+        <motoko-editor
+          :showNextBtn="false"
+          :showPrevBtn="false"
+        ></motoko-editor>
       </v-col>
+
+      <!-- Hints Dialog -->
+      <div class="text-center pa-4">
+        <v-dialog v-model="hintDialog" width="auto">
+          <v-card max-width="400" title="Hints">
+            <template v-slot:prepend>
+              <v-icon color="primary" :icon="hintIcon"></v-icon>
+            </template>
+            <v-card-text class="font-weight-light"
+              >Use these hints to guide your approach to solving the challenge.
+              Remember, hints provide helpful insights but do not directly solve
+              the problem.
+            </v-card-text>
+
+            <v-list>
+              <v-list-item
+                v-for="(hint, i) in currentChallengeInfo?.hints"
+                :key="i"
+                color="primary"
+              >
+                <v-list-item-subtitle>
+                  <v-icon size="small" color="indigo" :icon="hintIcon"></v-icon>
+                  <span class="font-italic">{{ hint }}</span>
+                </v-list-item-subtitle>
+              </v-list-item>
+            </v-list>
+
+            <template v-slot:actions>
+              <v-btn
+                class="ms-auto"
+                text="OK"
+                @click="hintDialog = false"
+              ></v-btn>
+            </template>
+          </v-card>
+        </v-dialog>
+      </div>
+      <!-- Solutions Dialog -->
+      <div class="text-center pa-4">
+        <v-dialog v-model="solutionDialog" width="auto">
+          <v-card max-width="700" title="Solution">
+            <template v-slot:prepend>
+              <v-icon color="primary" :icon="solutionIcon"></v-icon>
+            </template>
+            <v-card-text class="font-weight-light"
+              >The solution to this problem requires a systematic approach where
+              you break down the task into manageable steps.Implement the logic
+              step-by-step, ensuring that each part of your code solves a
+              specific part of the problem.
+            </v-card-text>
+
+            <v-card-text class="markdownClass">
+              <div
+                ref="challengeSolutionText"
+                v-html="challengeSolutionContentMarkDown"
+                class="markdown-content"
+              ></div>
+            </v-card-text>
+
+            <template v-slot:actions>
+              <v-btn text="COPY" @click="copyChallengeContent()"></v-btn>
+            </template>
+          </v-card>
+        </v-dialog>
+      </div>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import "highlight.js/styles/github.css";
+import { mapGetters } from "vuex";
+import { commonMixin } from "@/helpers/common";
+import MotokoEditor from "@/components/MotokoEditor.vue";
+import Storage from "@/services/localstorage";
+
 export default {
+  components: { MotokoEditor },
+  mixins: [commonMixin],
   data() {
     return {
-      problems: [
-        {
-          title: "Two Sum",
-          difficulty: "Easy",
-          description: "Given an array of integers...",
-          solved: true,
-        },
-        {
-          title: "Longest Substring Without Repeating Characters",
-          difficulty: "Medium",
-          description: "Given a string...",
-          solved: false,
-        },
-        {
-          title: "Median of Two Sorted Arrays",
-          difficulty: "Hard",
-          description: "Given two sorted arrays...",
-          solved: false,
-        },
-      ],
-      selectedProblem: { title: "", difficulty: "", description: "" },
-      code: "",
       loading: false,
+      hintDialog: false,
+      solutionDialog: false,
+      solutionIcon: "mdi-forum",
+      hintIcon: "mdi-lightbulb-on-outline",
     };
   },
+  computed: {
+    ...mapGetters([
+      "currentChallenge",
+      "challengeProblemContent",
+      "challengeSolutionContent",
+    ]),
+    challengeContentMarkDown() {
+      return this.convertTextToMd(
+        this.challengeProblemContent
+          ? this.challengeProblemContent
+          : Storage.get("currentChallengeContent")
+      );
+    },
+    challengeSolutionContentMarkDown() {
+      return this.convertTextToMd(this.challengeSolutionContent);
+    },
+    currentChallengeInfo() {
+      return Object.keys(this).length === 0
+        ? this.currentChallenge
+        : Storage.get("currentChallenge");
+    },
+  },
   methods: {
-    selectProblem(problem) {
-      this.selectedProblem = problem;
+    showHints() {
+      this.hintDialog = true;
     },
-    runCode() {
-      this.loading = true;
-      setTimeout(() => {
-        this.loading = false;
-        alert("Code executed successfully!");
-      }, 2000);
+    showSolutions() {
+      this.$store.dispatch(
+        "setChallengeSolutionContent",
+        this.currentChallengeInfo
+      );
+      this.solutionDialog = true;
     },
-    submitCode() {
-      this.loading = true;
-      setTimeout(() => {
-        this.loading = false;
-        alert("Code submitted!");
-      }, 2000);
+    copyChallengeContent() {
+      this.copyToContent(this.$refs.challengeSolutionText);
+      this.solutionDialog = false;
     },
   },
 };

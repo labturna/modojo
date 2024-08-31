@@ -5,23 +5,22 @@
     @click="rail = false"
     class="nav-draw-height-class"
   >
-    <tutorial-tree></tutorial-tree>
+    <tutorial-tree @switch-practice-content="drawer = !drawer"></tutorial-tree>
   </v-navigation-drawer>
+
+  <v-icon v-show="!drawer" @click="drawer = !drawer">mdi-menu</v-icon>
 
   <v-container>
     <v-card elevation="0">
-      <v-toolbar color="cyan-lighten-1">
-        <v-btn color="indigo" icon @click="drawer = !drawer">
-          <v-icon>{{ !drawer ? "mdi-menu" : "mdi-menu-left-outline" }}</v-icon>
-        </v-btn>
-        <v-toolbar-title>Practice</v-toolbar-title>
-      </v-toolbar>
       <v-row>
         <v-col cols="12" md="5">
           <lesson-content></lesson-content>
         </v-col>
         <v-col cols="12" md="7">
-          <motoko-editor></motoko-editor>
+          <motoko-editor
+            :showNextBtn="true"
+            :showPrevBtn="true"
+          ></motoko-editor>
         </v-col>
       </v-row>
     </v-card>
@@ -37,7 +36,7 @@ export default {
   components: { TutorialTree, LessonContent, MotokoEditor },
   data() {
     return {
-      drawer: true,
+      drawer: false,
     };
   },
 };
