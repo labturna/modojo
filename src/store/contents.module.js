@@ -63,7 +63,7 @@ const mutations = {
     state.showSolution = true;
     const response = await fetch(`../content/${payload.solution}`);
     state.solutionContent = await response.text();
-  },
+  },  
   async [SET_SHOW_SOLUTION](state, payload) {
     state.showSolution = payload;
   },

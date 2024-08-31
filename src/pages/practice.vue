@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import TutorialTree from "@/components/TutorialTree.vue";
+import TutorialTree from "@/components/tree/TutorialTree.vue";
 import LessonContent from "@/components/LessonContent.vue";
 import MotokoEditor from "@/components/MotokoEditor.vue";
 

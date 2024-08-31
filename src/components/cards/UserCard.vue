@@ -43,7 +43,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { commonMixin } from "../helpers/common";
+import { commonMixin } from "../../helpers/common";
 export default {
   mixins: [commonMixin],
   data: () => ({
