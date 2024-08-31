@@ -1,6 +1,12 @@
 <template>
   <v-container fluid>
     <v-row>
+      <v-col cols="12" class="pa-0 pl-3">
+        <v-btn @click="backChallengePage()" size="small" rounded="xl">
+          <v-icon color="indigo">mdi-arrow-left</v-icon>
+          <span class="text-indigo">Back</span>
+        </v-btn>
+      </v-col>
       <v-col cols="5">
         <v-card>
           <v-card-item>
@@ -27,6 +33,35 @@
               >
                 <v-icon :icon="solutionIcon" start></v-icon> Solution
               </v-chip>
+
+              <v-menu open-on-hover v-model="topicsMenu">
+                <template v-slot:activator="{ props }">
+                  <v-chip
+                    v-bind="props"
+                    size="small"
+                    class="ml-2"
+                    color="purple"
+                  >
+                    <v-icon :icon="topicsIcon" start></v-icon> Topics
+                  </v-chip>
+                </template>
+
+                <v-card
+                  v-if="currentChallengeInfo?.topics.length > 0"
+                  width="200"
+                  color="grey"
+                >
+                  <v-chip
+                    label
+                    class="mr-1 mb-1 mt-1"
+                    v-for="item in currentChallengeInfo?.topics"
+                    :key="item"
+                  >
+                    {{ item }}
+                  </v-chip>
+                </v-card>
+
+              </v-menu>
             </template>
           </v-card-item>
 
@@ -49,7 +84,7 @@
       <!-- Hints Dialog -->
       <div class="text-center pa-4">
         <v-dialog v-model="hintDialog" width="auto">
-          <v-card max-width="400" title="Hints">
+          <v-card max-width="500" title="Hints">
             <template v-slot:prepend>
               <v-icon color="primary" :icon="hintIcon"></v-icon>
             </template>
@@ -61,14 +96,14 @@
 
             <v-list>
               <v-list-item
-                v-for="(hint, i) in currentChallengeInfo?.hints"
+                v-for="(hint, i) in currentChallenge?.hints"
                 :key="i"
                 color="primary"
               >
-                <v-list-item-subtitle>
+                <v-card-text class="font-weight-light font-italic">
                   <v-icon size="small" color="indigo" :icon="hintIcon"></v-icon>
                   <span class="font-italic">{{ hint }}</span>
-                </v-list-item-subtitle>
+                </v-card-text>
               </v-list-item>
             </v-list>
 
@@ -130,7 +165,9 @@ export default {
       hintDialog: false,
       solutionDialog: false,
       solutionIcon: "mdi-forum",
+      topicsIcon: "mdi-format-list-bulleted",
       hintIcon: "mdi-lightbulb-on-outline",
+      topicsMenu: false,
     };
   },
   computed: {
@@ -150,7 +187,7 @@ export default {
       return this.convertTextToMd(this.challengeSolutionContent);
     },
     currentChallengeInfo() {
-      return Object.keys(this).length === 0
+      return Object.keys(this.currentChallenge).length !== 0
         ? this.currentChallenge
         : Storage.get("currentChallenge");
     },
@@ -169,6 +206,9 @@ export default {
     copyChallengeContent() {
       this.copyToContent(this.$refs.challengeSolutionText);
       this.solutionDialog = false;
+    },
+    backChallengePage() {
+      this.$router.push("challenges");
     },
   },
 };

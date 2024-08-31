@@ -17,12 +17,6 @@ const navigationItems = [
         icon: "mdi-head-cog -outline",
         showUserDetails: true,
     },
-    {
-        title: "ssss",
-        path: "/solutions",
-        icon: "mdi-head-cog -outline",
-        showUserDetails: true,
-    },
 ]
 
 export default navigationItems;

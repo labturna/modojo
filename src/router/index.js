@@ -1,6 +1,5 @@
 
 import Challenges from '@/pages/challenges.vue';
-import Dashboard from '@/pages/dashboard.vue';
 import Overview from '@/pages/overview.vue'
 import Practice from '@/pages/practice.vue';
 import Solutions from '@/pages/solutions.vue';
@@ -21,11 +20,6 @@ const routes = [
     path: '/practice',
     name: 'Practice',
     component: Practice,
-  },
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: Dashboard,
   },
   {
     path: '/challenges',

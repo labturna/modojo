@@ -1,14 +1,13 @@
 <template>
   <v-navigation-drawer
-    v-model="drawer"
+    v-model="drawerPractice"
     permanent
-    @click="rail = false"
     class="nav-draw-height-class"
   >
-    <tutorial-tree @switch-practice-content="drawer = !drawer"></tutorial-tree>
+    <tutorial-tree @switch-practice-content="drawerPractice = !drawerPractice"></tutorial-tree>
   </v-navigation-drawer>
 
-  <v-icon v-show="!drawer" @click="drawer = !drawer">mdi-menu</v-icon>
+  <v-icon v-show="!drawerPractice" @click="drawerPractice = !drawerPractice">mdi-menu</v-icon>
 
   <v-container>
     <v-card elevation="0">
@@ -36,7 +35,7 @@ export default {
   components: { TutorialTree, LessonContent, MotokoEditor },
   data() {
     return {
-      drawer: false,
+      drawerPractice: false,
     };
   },
 };

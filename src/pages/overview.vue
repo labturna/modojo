@@ -1,19 +1,38 @@
 <template>
   <v-card elevation="0">
+    <v-icon v-show="!drawerOverview" @click="drawerOverview = !drawerOverview"
+      >mdi-menu</v-icon
+    >
+
     <v-container>
       <v-card-text class="markdownClass">
-        <div ref="markdownContent" v-html="lessonsContentMarkdown" class="markdown-content"></div>
+        <div
+          ref="markdownContent"
+          v-html="lessonsContentMarkdown"
+          class="markdown-content"
+        ></div>
       </v-card-text>
     </v-container>
 
-    <v-navigation-drawer>
+    <v-navigation-drawer v-model="drawerOverview" permanent>
       <v-list>
-        <v-list-subheader class="text-decoration-underline">On This Page</v-list-subheader>
+        <v-card-title
+        >Contents
+        <v-icon @click="drawerOverview = false" size="small"
+            >mdi-close</v-icon
+          >
+      </v-card-title>
+        
         <v-list-item v-for="(header, index) in visibleHeaders" :key="index">
-          <v-btn @click="getMdDocsFiles(header.id)" variant="tonal" size="x-small">
+          <v-btn
+          class="pa-0"
+            @click="getMdDocsFiles(header.id)"
+            variant="plain"
+          >
             {{ index + 1 + "." + header.title }}
           </v-btn>
         </v-list-item>
+
       </v-list>
     </v-navigation-drawer>
   </v-card>
@@ -30,6 +49,7 @@ export default {
     return {
       markdownContent: "",
       defaultMdId: "overview",
+      drawerOverview: false,
       visibleHeaders: [
         { id: "overview", title: "Overview" },
         { id: "motivation_and_goals", title: "Motivation and Goals" },
@@ -45,7 +65,10 @@ export default {
         { id: "Deque", title: "Deque" },
         { id: "Error", title: "Error" },
         { id: "ExperimentalCycles", title: "Experimental Cycles" },
-        { id: "ExperimentalInternetComputer", title: "Experimental Internet Computer" },
+        {
+          id: "ExperimentalInternetComputer",
+          title: "Experimental Internet Computer",
+        },
         { id: "ExperimentalStableMemory", title: "Experimental Stable Memory" },
         { id: "Float", title: "Float" },
         { id: "Func", title: "Func" },
@@ -80,7 +103,7 @@ export default {
         { id: "Timer", title: "Timer" },
         { id: "Trie", title: "Trie" },
         { id: "TrieMap", title: "Trie Map" },
-        { id: "TrieSet", title: "Trie Set" }
+        { id: "TrieSet", title: "Trie Set" },
       ],
     };
   },
