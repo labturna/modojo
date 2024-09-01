@@ -60,7 +60,6 @@
                     {{ item }}
                   </v-chip>
                 </v-card>
-
               </v-menu>
             </template>
           </v-card-item>
@@ -94,7 +93,7 @@
               the problem.
             </v-card-text>
 
-            <v-list>
+            <v-list v-if="currentChallenge?.hints?.length > 0">
               <v-list-item
                 v-for="(hint, i) in currentChallenge?.hints"
                 :key="i"
@@ -106,6 +105,10 @@
                 </v-card-text>
               </v-list-item>
             </v-list>
+
+            <v-card-text v-else class="font-weight-light font-italic">
+              <span>Not found hint!</span>
+            </v-card-text>
 
             <template v-slot:actions>
               <v-btn
@@ -140,7 +143,9 @@
             </v-card-text>
 
             <template v-slot:actions>
-              <v-btn text="COPY" @click="copyChallengeContent()"></v-btn>
+              <v-btn  @click="copyChallengeContent()">
+                COPY <v-icon class="mr-2 ml-1">mdi-content-copy</v-icon> 
+              </v-btn>
             </template>
           </v-card>
         </v-dialog>

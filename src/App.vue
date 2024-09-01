@@ -16,6 +16,19 @@
             >{{ appBarHeader }}
             <span class="font-weight-bold">{{ currentRootName }}</span>
           </span>
+
+          <v-spacer></v-spacer>
+          <div class="mr-2">
+            <v-icon v-if="isDarkMode" color="indigo">mdi-weather-night</v-icon>
+            <v-icon v-else color="orange">mdi-weather-sunny</v-icon>
+          </div>
+          <v-switch
+           @change="toggleTheme"
+            v-model="isDarkMode"
+            hide-details
+            inset
+            class="mr-2"
+          ></v-switch>
         </v-app-bar>
 
         <router-view></router-view>
@@ -39,14 +52,15 @@ export default {
       appBarHeader: "Your work",
       navGoHomeIcon: "mdi-keyboard-return",
       navGoHomeName: "Dashboard",
-      defaultPath: '/overview'
+      defaultPath: "/overview",
+      isDarkMode: true,
     };
   },
   components: { NavigationBar },
   watch: {
     $route(to, from) {
-      if(this.getCurrentRootMethod() === '/') {
-      this.redirectToResourcePage(this.defaultPath);
+      if (this.getCurrentRootMethod() === "/") {
+        this.redirectToResourcePage(this.defaultPath);
       }
       this.$store.dispatch("setCurrentRoot", to.name);
     },
@@ -54,6 +68,9 @@ export default {
   methods: {
     redirect() {
       this.redirectToResourcePage(this.defaultPath);
+    },
+    toggleTheme() {
+      this.$vuetify.theme.global.name = this.isDarkMode ? 'dark' : 'light';
     },
   },
 };

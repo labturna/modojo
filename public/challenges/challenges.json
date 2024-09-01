@@ -19,7 +19,13 @@
         "The second train of thought is, without changing the array, can we use additional space somehow? Like maybe a hash map to speed up the search?"
       ],
       "topics": [
-        "Array", "Hash Table","Hash Table","Hash Table","Hash Table","Hash Table","Hash Table"
+        "Array",
+        "Hash Table",
+        "Hash Table",
+        "Hash Table",
+        "Hash Table",
+        "Hash Table",
+        "Hash Table"
       ]
     },
     {
@@ -50,7 +56,11 @@
       ],
       "solution": "challenges/palindrome/solution.md",
       "description": "You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.",
-      "difficulty": "Medium"
+      "difficulty": "Medium",
+      "hints": [],
+      "topics": [
+        "Math", "Linked List", "Recursion"
+      ]
     }
   ]
 }
