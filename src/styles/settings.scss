@@ -19,7 +19,6 @@
 // set app bar height and bg color
 .v-toolbar__content {
     height: 48px !important;
-    background-color: #f5f5f5 !important;
 }
 
 
@@ -73,7 +72,7 @@ $link-hover-color: #06014e;
   }
 
   h2 {
-    color: #3F51B5 !important;
+    color: #68ad63 !important;
     font-size: 1.2em;
   }
 
@@ -114,4 +113,36 @@ $link-hover-color: #06014e;
       border-bottom-color: $link-hover-color;
     }
   }
+}
+
+.markdownClass {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.markdownClass code{
+  color:#fff;
+  background-color: #6142eb;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.markdownClass h1, .markdownClass h2, .markdownClass h3 {
+  color: #1e88e5;
+}
+
+.markdownClass p {
+  margin-bottom: 15px;
+}
+
+.markdownClass a {
+  color: #cff062;
+  text-decoration: none;
+}
+
+.markdownClass a:hover {
+  text-decoration: underline;
 }

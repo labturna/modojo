@@ -30,3 +30,4 @@ Constraints:
 - isPalindrome(-121) returns false
 - isPalindrome(10) returns false
 - isPalindrome(1221) returns true
+

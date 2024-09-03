@@ -1,7 +1,10 @@
 <template>
   <v-card elevation="0">
     <v-card-text class="custom-scrollable-content">
-      <v-card-title>Contents</v-card-title>
+      <v-card-title
+        >Contents
+        <v-icon size="small" @click="showContents()">mdi-close</v-icon>
+      </v-card-title>
       <v-treeview
         v-model:selected="tree"
         :items="treeItems"
@@ -36,6 +39,9 @@ export default {
       selectedObject: {},
     };
   },
+  props:{
+    showPracticeContent: Boolean
+  },
   computed: {
     ...mapGetters(["currentContents"]),
     filter() {
@@ -66,7 +72,10 @@ export default {
     handleSelection(selected) {
       if (selected.length) {
         const selectedItemSlug = selected[0];
-        this.selectedObject = this.findItemBySlug(this.treeItems, selectedItemSlug);
+        this.selectedObject = this.findItemBySlug(
+          this.treeItems,
+          selectedItemSlug
+        );
         this.$store.dispatch("getCurrentContent", this.selectedObject);
       }
     },
@@ -98,6 +107,9 @@ export default {
           console.error("Content fetch error:", error);
         });
     },
+    showContents(){
+      this.$emit('switch-practice-content')
+    }
   },
 };
 </script>

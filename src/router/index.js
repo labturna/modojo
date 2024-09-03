@@ -1,7 +1,8 @@
 
-import Dashboard from '@/pages/dashboard.vue';
+import Challenges from '@/pages/challenges.vue';
 import Overview from '@/pages/overview.vue'
 import Practice from '@/pages/practice.vue';
+import Solutions from '@/pages/solutions.vue';
 import { createRouter, createWebHistory } from 'vue-router/auto'
 
 const routes = [
@@ -21,9 +22,14 @@ const routes = [
     component: Practice,
   },
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: Dashboard,
+    path: '/challenges',
+    name: 'Challenges',
+    component: Challenges,
+  },
+  {
+    path: '/solutions',
+    name: 'Solutions',
+    component: Solutions,
   },
 ];
 

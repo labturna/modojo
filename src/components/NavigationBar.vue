@@ -97,9 +97,9 @@ export default {
 </script>
 
 <style scoped>
-.nav-bg-color {
+/* .nav-bg-color {
   background-color: #f5f5f5 !important;
-}
+} */
 .v-navigation-drawer .v-spacer {
   flex-grow: 1;
 }

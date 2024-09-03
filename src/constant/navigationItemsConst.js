@@ -11,6 +11,12 @@ const navigationItems = [
         icon: "mdi-monitor-dashboard",
         showUserDetails: true,
     },
+    {
+        title: "Challenges",
+        path: "/challenges",
+        icon: "mdi-head-cog -outline",
+        showUserDetails: true,
+    },
 ]
 
 export default navigationItems;
