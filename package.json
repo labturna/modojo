@@ -1,44 +1,20 @@
 {
-    "name": "frontend",
-    "version": "0.0.0",
+    "name": "modojo",
+    "type": "module",
+    "version":"0.1.0",
     "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "preview": "vite preview",
-        "lint": "eslint . --fix --ignore-path .gitignore"
+        "start": "npm start --workspaces --if-present",
+        "prebuild": "npm run prebuild --workspaces --if-present",
+        "build": "npm run build --workspaces --if-present",
+        "pretest": "npm run prebuild --workspaces --if-present",
+        "test": "npm test --workspaces --if-present"
     },
-    "dependencies": {
-        "@mdi/font": "^7.4.47",
-        "axios": "^1.7.2",
-        "core-js": "^3.34.0",
-        "highlight.js": "^11.10.0",
-        "highlightjs-motoko": "^1.0.3",
-        "lodash": "^4.17.21",
-        "marked": "12.0.2",
-        "motoko": "3.8.0",
-        "roboto-fontface": "*",
-        "vue": "^3.0.0",
-        "vue-cookies": "^1.8.4",
-        "vue-prism-editor": "^2.0.0-alpha.2",
-        "vuetify": "^3.5.0",
-        "vuex": "^4.0.0",
-        "prismjs": "1.15.0"
+    "engines": {
+        "node": ">=16.0.0",
+        "npm": ">=7.0.0"
     },
-    "devDependencies": {
-        "@vitejs/plugin-vue": "^5.0.4",
-        "eslint": "^8.57.0",
-        "eslint-config-standard": "^17.1.0",
-        "eslint-plugin-import": "^2.29.1",
-        "eslint-plugin-n": "^16.6.2",
-        "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-promise": "^6.1.1",
-        "eslint-plugin-vue": "^9.22.0",
-        "sass": "^1.71.1",
-        "unplugin-fonts": "^1.1.1",
-        "unplugin-vue-components": "^0.26.0",
-        "unplugin-vue-router": "^0.8.4",
-        "vite": "^5.1.5",
-        "vite-plugin-vuetify": "^2.0.3",
-        "vue-router": "^4.3.0"
-    }
+    "workspaces": [
+        "src/modojo_backend",
+        "src/modojo_frontend"
+    ]
 }

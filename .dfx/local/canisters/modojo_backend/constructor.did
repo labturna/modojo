@@ -1,0 +1,30 @@
+type UserProgressType = 
+ record {
+   badges: vec text;
+   completedChallengeCount: nat;
+   completedChallenges: vec text;
+   projectUrls: vec text;
+   registrationDate: Time;
+   score: float64;
+   username: text;
+ };
+type Time = int;
+type ChallengeInfo = 
+ record {
+   difficulty: text;
+   id: text;
+   name: text;
+ };
+service : {
+  completeChallenge: (principal, ChallengeInfo, bool) -> (bool);
+  debugAllProgress: () -> ();
+  getAllUsersDetails: () -> (vec UserProgressType) query;
+  getCurrentDateInfo: () -> (text) query;
+  getMonthlyUsers: () -> (vec nat) query;
+  getTotalUsers: () -> (nat) query;
+  getUserDetails: (principal) -> (opt UserProgressType) query;
+  getWeeklyUsers: () -> (vec nat) query;
+  logInUser: (principal) -> (bool);
+  submitProject: (principal, text, text) -> (bool);
+  updateUsername: (principal, text) -> (bool);
+}

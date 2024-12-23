@@ -1,0 +1,20 @@
+// Version: 1.0.0
+type Time = Int;
+type UserProgressType =
+  {
+    badges : [Text];
+    completedChallengeCount : Nat;
+    completedChallenges : [Text];
+    projectUrls : [Text];
+    registrationDate : Time;
+    score : Float;
+    username : Text
+  };
+type UserProgressType__1 = UserProgressType;
+actor {
+  stable var challengeAttempsStorage : [(Text, Nat)];
+  stable var monthlyUsers : [var Nat];
+  stable var totalUsers : Nat;
+  stable var userProgressStorage : [(Principal, UserProgressType__1)];
+  stable var weeklyUsers : [var Nat]
+};
